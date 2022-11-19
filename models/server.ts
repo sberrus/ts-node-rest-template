@@ -1,4 +1,5 @@
 // imports
+import bodyParser from "body-parser";
 import express, { Application } from "express";
 import pingRouter from "../routes/ping.routes";
 
@@ -16,8 +17,14 @@ class Server {
 		this.app = express();
 		this.port = process.env.PORT || "8080";
 
+		// init middlewares
+		this.middleware();
 		// init routes
 		this.routes();
+	}
+
+	private middleware() {
+		this.app.use(bodyParser.json());
 	}
 
 	private routes() {
